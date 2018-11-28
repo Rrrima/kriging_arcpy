@@ -20,14 +20,15 @@ def adf(fields):
           
 adf(['temp','pre','hum','wsp'])
 
+#set environment mask
+env.mask = 'C:/workspace/shps/北京边界.shp'
+
 for i in range(1,3):
     day_count = i
     in_table = os.path.join(out_path,'day%d.shp'%(day_count))
     arcpy.DefineProjection_management(in_table, spRef)
     out_lyr = 'pp_day%d'%(day_count)
     arcpy.MakeXYEventLayer_management(in_table, 'long', 'lat', out_lyr, spRef)
-    
-
     inFeatures = out_lyr
     for name in names:
         field = name
